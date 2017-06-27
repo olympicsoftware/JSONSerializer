@@ -12,6 +12,7 @@
 		5000422C1F0221F600A3D0D9 /* JSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 5000421E1F0221F600A3D0D9 /* JSONSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		500042361F0222F200A3D0D9 /* outputTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 500042351F0222F200A3D0D9 /* outputTest.json */; };
 		500042381F0223ED00A3D0D9 /* JSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500042371F0223ED00A3D0D9 /* JSONSerializer.swift */; };
+		5000423B1F0311B100A3D0D9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5000423A1F0311B100A3D0D9 /* SwiftyJSON.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		5000422B1F0221F600A3D0D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		500042351F0222F200A3D0D9 /* outputTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outputTest.json; sourceTree = "<group>"; };
 		500042371F0223ED00A3D0D9 /* JSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerializer.swift; sourceTree = "<group>"; };
+		5000423A1F0311B100A3D0D9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +50,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				500042251F0221F600A3D0D9 /* JSONSerialization.framework in Frameworks */,
+				5000423B1F0311B100A3D0D9 /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +63,7 @@
 				5000421D1F0221F600A3D0D9 /* JSONSerialization */,
 				500042281F0221F600A3D0D9 /* JSONSerializationTests */,
 				5000421C1F0221F600A3D0D9 /* Products */,
+				500042391F0311B000A3D0D9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +94,14 @@
 				500042351F0222F200A3D0D9 /* outputTest.json */,
 			);
 			path = JSONSerializationTests;
+			sourceTree = "<group>";
+		};
+		500042391F0311B000A3D0D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5000423A1F0311B100A3D0D9 /* SwiftyJSON.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +143,7 @@
 				500042201F0221F600A3D0D9 /* Sources */,
 				500042211F0221F600A3D0D9 /* Frameworks */,
 				500042221F0221F600A3D0D9 /* Resources */,
+				5000423C1F03164D00A3D0D9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -200,6 +213,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5000423C1F03164D00A3D0D9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		500042161F0221F600A3D0D9 /* Sources */ = {
@@ -376,6 +406,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = Z6LKC7ARK2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = JSONSerializationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nz.co.olympic.JSONSerializationTests;
@@ -389,6 +423,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = Z6LKC7ARK2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = JSONSerializationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nz.co.olympic.JSONSerializationTests;
@@ -416,6 +454,7 @@
 				500042311F0221F600A3D0D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		500042321F0221F600A3D0D9 /* Build configuration list for PBXNativeTarget "JSONSerializationTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +463,7 @@
 				500042341F0221F600A3D0D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
