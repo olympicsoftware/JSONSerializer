@@ -10,6 +10,8 @@
 		500042251F0221F600A3D0D9 /* JSONSerialization.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5000421B1F0221F600A3D0D9 /* JSONSerialization.framework */; };
 		5000422A1F0221F600A3D0D9 /* JSONSerializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500042291F0221F600A3D0D9 /* JSONSerializationTests.swift */; };
 		5000422C1F0221F600A3D0D9 /* JSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 5000421E1F0221F600A3D0D9 /* JSONSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500042361F0222F200A3D0D9 /* outputTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 500042351F0222F200A3D0D9 /* outputTest.json */; };
+		500042381F0223ED00A3D0D9 /* JSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500042371F0223ED00A3D0D9 /* JSONSerializer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		500042241F0221F600A3D0D9 /* JSONSerializationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSONSerializationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		500042291F0221F600A3D0D9 /* JSONSerializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSerializationTests.swift; sourceTree = "<group>"; };
 		5000422B1F0221F600A3D0D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		500042351F0222F200A3D0D9 /* outputTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outputTest.json; sourceTree = "<group>"; };
+		500042371F0223ED00A3D0D9 /* JSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerializer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 			children = (
 				5000421E1F0221F600A3D0D9 /* JSONSerialization.h */,
 				5000421F1F0221F600A3D0D9 /* Info.plist */,
+				500042371F0223ED00A3D0D9 /* JSONSerializer.swift */,
 			);
 			path = JSONSerialization;
 			sourceTree = "<group>";
@@ -82,6 +87,7 @@
 			children = (
 				500042291F0221F600A3D0D9 /* JSONSerializationTests.swift */,
 				5000422B1F0221F600A3D0D9 /* Info.plist */,
+				500042351F0222F200A3D0D9 /* outputTest.json */,
 			);
 			path = JSONSerializationTests;
 			sourceTree = "<group>";
@@ -149,6 +155,7 @@
 					5000421A1F0221F600A3D0D9 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = Z6LKC7ARK2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					500042231F0221F600A3D0D9 = {
@@ -188,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				500042361F0222F200A3D0D9 /* outputTest.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				500042381F0223ED00A3D0D9 /* JSONSerializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +333,7 @@
 		500042301F0221F600A3D0D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6LKC7ARK2;
@@ -336,6 +346,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nz.co.olympic.JSONSerialization;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -343,6 +354,7 @@
 		500042311F0221F600A3D0D9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z6LKC7ARK2;
@@ -362,6 +374,7 @@
 		500042331F0221F600A3D0D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = Z6LKC7ARK2;
 				INFOPLIST_FILE = JSONSerializationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -374,6 +387,7 @@
 		500042341F0221F600A3D0D9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = Z6LKC7ARK2;
 				INFOPLIST_FILE = JSONSerializationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

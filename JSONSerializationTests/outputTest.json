@@ -1,0 +1,14 @@
+{
+    "StringProp": "yolo",
+    "IntProp" : 5,
+    "DecimalProp": 3.4,
+    "DoubleProp": 5.5,
+    "FloatProp": 8.8,
+    "BoolProp": true,
+    "StringArrayProp": ["a", "b", "c"],
+    "IntArrayProp": [1, 2, 3],
+    "ObjectProp" : {
+        "StringProp" : "a",
+        "IntProp": 3
+    }
+}

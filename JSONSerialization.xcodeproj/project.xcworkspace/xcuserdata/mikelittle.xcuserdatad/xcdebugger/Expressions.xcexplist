@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "JSONSerializable.isPrimitive() -&gt; Bool:JSONSerializer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self is NSNumber">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
