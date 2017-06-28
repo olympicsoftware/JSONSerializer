@@ -3,7 +3,7 @@ import Foundation
 public class JSONMapper {
     private var map = [String: ((Any) -> AnyObject)]()
     
-    init(){
+    public init(){
         self.addMapping(type: String.self) { s in s as AnyObject }
         self.addMapping(type: Int.self) { s in s as AnyObject }
         self.addMapping(type: Double.self) { s in s as AnyObject }
@@ -51,7 +51,7 @@ extension Optional : JSONSerializable {
 public class JSONSerializer {
     let mapper : JSONMapper
     
-    init(mapper : JSONMapper) {
+    public init(mapper : JSONMapper) {
         self.mapper = mapper
     }
     
