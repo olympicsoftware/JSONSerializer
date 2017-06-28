@@ -98,6 +98,18 @@ class JSONSerializationTests: XCTestCase {
         
     }
     
+    func testRootArray(){
+        let it = createSerializer()
+        
+        let animals = [Animal(name: "Roger", age: 7), Animal(name: "Mr Pickles", age: 6)]
+        
+        let string = it.toJSON(animals) ?? ""
+        let json = JSON.parse(string)
+        
+        XCTAssert(json[0].string == "Roger is 7 years old")
+        XCTAssert(json[1].string == "Mr Pickles is 6 years old")
+    }
+    
     func testArrays() {
         let it = createSerializer()
         
@@ -116,11 +128,11 @@ class JSONSerializationTests: XCTestCase {
         XCTAssert(json["DateOfBirth"].string == "1970-01-06 18:53:20 +0000 Yea boi")
         XCTAssert(json["Pet"].string == "Poppy is 16 years old")
         XCTAssert(json["Children"][0]["Name"] == "Mike")
-        XCTAssert(json["Children"][0]["DateOfBirth"] == "Mike")
+        XCTAssert(json["Children"][0]["DateOfBirth"] == "1970-01-06 21:40:00 +0000 Yea boi")
         XCTAssert(json["Children"][0]["Pet"] == "Scruffy is 5 years old")
         
         XCTAssert(json["Children"][1]["Name"] == "Hugs")
-        XCTAssert(json["Children"][1]["DateOfBirth"] == "Mike")
+        XCTAssert(json["Children"][1]["DateOfBirth"] == "1970-01-07 00:26:40 +0000 Yea boi")
         XCTAssert(json["Children"][1]["Pet"] == "Bonny is 8 years old")
     }
 }

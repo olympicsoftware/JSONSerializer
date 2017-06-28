@@ -32,7 +32,7 @@ protocol JSONSerializable {
 }
 
 
-extension NSArray : JSONSerializable {
+extension Array : JSONSerializable {
     func serialize(serializer: JSONSerializer) -> AnyObject {
         return self.map({ serializer.toObj($0)}) as AnyObject
     }
@@ -58,7 +58,7 @@ class JSONSerializer {
     func toJSON(_ obj : Any) -> String? {
         //At the top level we only handle objects {} or arrays
         let validObj : Any
-        if let arr = obj as? NSArray {
+        if let arr = obj as? Array<Any> {
             validObj = arr.serialize(serializer: self)
         }else {
             validObj = buildDict(obj)
