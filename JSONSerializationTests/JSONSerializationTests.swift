@@ -8,6 +8,24 @@ struct Animal {
     let age: Int
 }
 
+struct Person {
+    let name: String
+    let dateOfBirth: Date
+    let pet: Animal
+}
+
+struct Thing {
+    let name: String
+    let maybeName: String?
+    let otherMaybeName: String?
+}
+
+struct ParentThing {
+    let name: String
+    let subThing: Thing
+    let optionalSubThing: Thing?
+}
+
 class JSONSerializationTests: XCTestCase {
     func createSerializer() -> JSONSerializer {
         let m = JSONMapper()
@@ -30,5 +48,45 @@ class JSONSerializationTests: XCTestCase {
         
         XCTAssert(json["Name"].string == "Spike")
         XCTAssert(json["Age"].number == 5)
+    }
+    
+    func testOptionals(){
+        let it = createSerializer()
+        
+        let json = JSON.parse(it.toJSON(Thing(name: "Spike", maybeName: nil, otherMaybeName: "James")) ?? "")
+        
+        XCTAssert(json["Name"].string == "Spike")
+        XCTAssert(json["MaybeName"].string == nil)
+        XCTAssert(json["OtherMaybeName"].string == "James")
+    }
+    
+    func testOptionalSubObjects(){
+        let it = createSerializer()
+        
+        let thing = ParentThing(name: "Jayquelin",
+                                subThing: Thing(name: "Spike", maybeName: nil, otherMaybeName: "James"),
+                                optionalSubThing: nil)
+        
+        let string = it.toJSON(thing) ?? ""
+        let json = JSON.parse(string)
+        
+        XCTAssert(json["Name"].string == "Jayquelin")
+        XCTAssert(json["SubThing"]["Name"].string == "Spike")
+        XCTAssert(json["SubThing"]["MaybeName"].string == nil)
+        XCTAssert(json["SubThing"]["OtherMaybeName"].string == "James")
+        XCTAssert(json["OptionalSubThing"] == JSON.null)
+    }
+    
+    func testCustomMapping() {
+        let it = createSerializer()
+        
+        let person = Person(name: "Lars", dateOfBirth: Date(timeIntervalSince1970: 500000), pet: Animal(name: "Poppy", age: 16))
+        
+        let string = it.toJSON(person) ?? ""
+        let json = JSON.parse(string)
+        
+        XCTAssert(json["Name"].string == "Lars")
+        XCTAssert(json["DateOfBirth"].string == "1970-01-06 18:53:20 +0000 Yea boi")
+        XCTAssert(json["Pet"].string == "Poppy is 16 years old")
     }
 }
