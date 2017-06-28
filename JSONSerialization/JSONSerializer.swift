@@ -1,6 +1,6 @@
 import Foundation
 
-class JSONMapper {
+public class JSONMapper {
     private var map = [String: ((Any) -> AnyObject)]()
     
     init(){
@@ -12,34 +12,34 @@ class JSONMapper {
         self.addMapping(type: Bool.self) { s in s as AnyObject }
     }
     
-    func addMapping<T>(type: T.Type,  fn: @escaping ((T) -> AnyObject)){
+    public func addMapping<T>(type: T.Type,  fn: @escaping ((T) -> AnyObject)){
         map[String(describing: type)] = {a in
             fn(a as! T)
         }
     }
     
-    func applyMapping(obj: Any) -> AnyObject{
+    public func applyMapping(obj: Any) -> AnyObject{
         return map[String(describing: type(of: obj))]!(obj)
     }
     
-    func hasMapping(obj: Any) -> Bool {
+    public func hasMapping(obj: Any) -> Bool {
         return map[String(describing: type(of: obj))] != nil
     }
 }
 
-protocol JSONSerializable {
+public protocol JSONSerializable {
     func serialize(serializer: JSONSerializer) -> AnyObject
 }
 
 
 extension Array : JSONSerializable {
-    func serialize(serializer: JSONSerializer) -> AnyObject {
+    public func serialize(serializer: JSONSerializer) -> AnyObject {
         return self.map({ serializer.toObj($0)}) as AnyObject
     }
 }
 
 extension Optional : JSONSerializable {
-    func serialize(serializer: JSONSerializer) -> AnyObject  {
+    public func serialize(serializer: JSONSerializer) -> AnyObject  {
         if let val = self {
             return serializer.toObj(val) ?? NSNull() as AnyObject
         }
@@ -48,14 +48,14 @@ extension Optional : JSONSerializable {
     }
 }
 
-class JSONSerializer {
+public class JSONSerializer {
     let mapper : JSONMapper
     
     init(mapper : JSONMapper) {
         self.mapper = mapper
     }
     
-    func toJSON(_ obj : Any) -> String? {
+    public func toJSON(_ obj : Any) -> String? {
         //At the top level we only handle objects {} or arrays
         let validObj : Any
         if let arr = obj as? Array<Any> {
