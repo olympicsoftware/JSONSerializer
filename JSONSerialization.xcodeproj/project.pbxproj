@@ -13,6 +13,7 @@
 		500042361F0222F200A3D0D9 /* outputTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 500042351F0222F200A3D0D9 /* outputTest.json */; };
 		500042381F0223ED00A3D0D9 /* JSONSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500042371F0223ED00A3D0D9 /* JSONSerializer.swift */; };
 		5000423B1F0311B100A3D0D9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5000423A1F0311B100A3D0D9 /* SwiftyJSON.framework */; };
+		5000423E1F034A3B00A3D0D9 /* String.extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5000423D1F034A3B00A3D0D9 /* String.extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		500042351F0222F200A3D0D9 /* outputTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outputTest.json; sourceTree = "<group>"; };
 		500042371F0223ED00A3D0D9 /* JSONSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerializer.swift; sourceTree = "<group>"; };
 		5000423A1F0311B100A3D0D9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		5000423D1F034A3B00A3D0D9 /* String.extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				5000421E1F0221F600A3D0D9 /* JSONSerialization.h */,
 				5000421F1F0221F600A3D0D9 /* Info.plist */,
 				500042371F0223ED00A3D0D9 /* JSONSerializer.swift */,
+				5000423D1F034A3B00A3D0D9 /* String.extensions.swift */,
 			);
 			path = JSONSerialization;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				500042381F0223ED00A3D0D9 /* JSONSerializer.swift in Sources */,
+				5000423E1F034A3B00A3D0D9 /* String.extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

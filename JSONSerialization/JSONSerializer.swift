@@ -1,81 +1,77 @@
 import Foundation
 
-public protocol JSONSerializable {
+class JSONMapper {
+    private var map = [String: ((Any) -> AnyObject)]()
     
-}
-
-protocol JSONPrimitive {
-}
-
-extension JSONSerializable {
-    func toJSONString() -> String? {
-        let obj = self.toJSONObj()
-        
-        let data =  try? JSONSerialization.data(withJSONObject: obj, options: [])
-        
-        return data == nil
-            ? nil
-            : String(data: data!, encoding: .utf8)
+    func addMapping<T>(type: T.Type,  fn: @escaping ((T) -> AnyObject)){
+        map[String(describing: type)] = {a in
+            fn(a as! T)
+        }
     }
     
-    func toJSONObj() -> AnyObject {
-        let obj: AnyObject
-        
-        // Array case
-        if let arrSelf = self as? NSArray {
-            obj = serializeArray(arrSelf)
-        } else { // Object case
-            obj = serializeObj(self)
-        }
-        
-        return obj
+    func applyMapping(obj: Any) -> AnyObject{
+        return map[String(describing: type(of: obj))]!(obj)
+    }
+    
+    func hasMapping(obj: Any) -> Bool {
+        return map[String(describing: type(of: obj))] != nil
     }
 }
 
-func serializeArray(_ arr : NSArray) -> AnyObject {
-    return arr.map({ el -> AnyObject in
-        if el is JSONPrimitive {
-            return el as AnyObject
-        } else if let seri = el as? JSONSerializable {
-            return seri.toJSONObj()
-        } else {
-            return NSNull() as AnyObject
-        }
-    }) as AnyObject
+protocol JSONSerializable {
+    func serialize(serializer: JSONSerializer) -> AnyObject
 }
 
-func serializeObj(_ obj: JSONSerializable) -> AnyObject {
-    var result = [String:AnyObject]()
-    
-    for case let (label?, value) in Mirror(reflecting: obj).children {
-        let labelCapitalized = label.uppercaseFirst
-        
-        if value is JSONPrimitive {
-            result[labelCapitalized] = value as AnyObject
-        }
-        
-        if let serializable = value as? JSONSerializable {
-            result[labelCapitalized] = serializable.toJSONObj()
-        }
-    }
 
-    return result as AnyObject
+extension NSArray : JSONSerializable {
+    func serialize(serializer: JSONSerializer) -> AnyObject {
+        return self.map({ serializer.toObj($0)}) as AnyObject
+    }
 }
 
-// Primitives
-extension String: JSONPrimitive {}
-extension Int: JSONPrimitive {}
-extension Bool: JSONPrimitive {}
-extension Decimal: JSONPrimitive {}
-extension Double: JSONPrimitive {}
-extension Float: JSONPrimitive {}
+extension Optional : JSONSerializable {
+    func serialize(serializer: JSONSerializer) -> AnyObject  {
+        if let val = self {
+            return serializer.toObj(val)
+        }
+        
+        return NSNull() as AnyObject
+    }
+}
 
-extension String {
-    var first: String {
-        return String(characters.prefix(1))
+class JSONSerializer {
+    let mapper : JSONMapper
+    
+    init(mapper : JSONMapper) {
+        self.mapper = mapper
     }
     
-    var uppercaseFirst: String {
-        return first.uppercased() + String(characters.dropFirst())
+    func toJSON(_ obj : Any) -> String? {
+        //At the top level we only handle objects {} or arrays
+        let validObj : Any
+        if let arr = obj as? NSArray {
+            validObj = arr.serialize(serializer: self)
+        }else {
+            validObj = buildDict(obj)
+        }
+        
+        let data = try? JSONSerialization.data(withJSONObject: validObj, options: [])
+        return data == nil ? nil : String(data: data!, encoding: .utf8)
+    }
+    
+    func toObj(_ obj: Any) -> AnyObject{
+        return NSNull()
+    }
+    
+    private func buildDict(_ obj: Any) -> [String: AnyObject] {
+        var result = [String: AnyObject]()
+        
+        for case let (label?, value) in Mirror(reflecting: obj).children {
+            let key = label.uppercaseFirst
+            
+            result[key] = value as AnyObject
+        }
+        
+        return result
     }
 }
