@@ -14,6 +14,13 @@ struct Person {
     let pet: Animal
 }
 
+struct PersonWithChildren {
+    let name: String
+    let dateOfBirth: Date
+    let pet: Animal
+    let children: [Person]
+}
+
 struct Thing {
     let name: String
     let maybeName: String?
@@ -88,5 +95,33 @@ class JSONSerializationTests: XCTestCase {
         XCTAssert(json["Name"].string == "Lars")
         XCTAssert(json["DateOfBirth"].string == "1970-01-06 18:53:20 +0000 Yea boi")
         XCTAssert(json["Pet"].string == "Poppy is 16 years old")
+        
+    }
+    
+    func testArrays() {
+        let it = createSerializer()
+        
+        let person = PersonWithChildren(name: "Lars",
+                                        dateOfBirth: Date(timeIntervalSince1970: 500000),
+                                        pet: Animal(name: "Poppy", age: 16),
+                                        children: [
+                                            Person(name: "Mike", dateOfBirth: Date(timeIntervalSince1970: 510000), pet: Animal(name: "Scruffy", age: 5)),
+                                            Person(name: "Hugs", dateOfBirth: Date(timeIntervalSince1970: 520000), pet: Animal(name: "Bonny", age: 8))
+                                        ])
+        
+        let string = it.toJSON(person) ?? ""
+        let json = JSON.parse(string)
+        
+        XCTAssert(json["Name"].string == "Lars")
+        XCTAssert(json["DateOfBirth"].string == "1970-01-06 18:53:20 +0000 Yea boi")
+        XCTAssert(json["Pet"].string == "Poppy is 16 years old")
+        XCTAssert(json["Children"][0]["Name"] == "Mike")
+        XCTAssert(json["Children"][0]["DateOfBirth"] == "Mike")
+        XCTAssert(json["Children"][0]["Pet"] == "Scruffy is 5 years old")
+        
+        XCTAssert(json["Children"][1]["Name"] == "Hugs")
+        XCTAssert(json["Children"][1]["DateOfBirth"] == "Mike")
+        XCTAssert(json["Children"][1]["Pet"] == "Bonny is 8 years old")
     }
 }
+
